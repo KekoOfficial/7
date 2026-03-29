@@ -1,124 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bot Control Panel</title>
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#0d0d0d;
-color:white;
-}
-
-.header{
-padding:15px;
-background:#1a1a1a;
-color:#00ff88;
-text-align:center;
-font-weight:bold;
-}
-
-.container{
-display:flex;
-height:100vh;
-}
-
-.left{
-width:320px;
-background:#151515;
-padding:15px;
-}
-
-.right{
-flex:1;
-padding:15px;
-}
-
-input,textarea{
-width:100%;
-padding:10px;
-margin:5px 0;
-background:#222;
-border:none;
-color:white;
-border-radius:5px;
-}
-
-button{
-width:100%;
-padding:12px;
-background:#00ff88;
-border:none;
-cursor:pointer;
-font-weight:bold;
-border-radius:5px;
-}
-
-button:hover{
-background:#00cc66;
-}
-
-.log{
-background:#111;
-height:90%;
-overflow:auto;
-padding:10px;
-font-size:13px;
-border-radius:5px;
-}
-</style>
+<meta charset="UTF-8">
+<title>Chat Panel</title>
+<link rel="stylesheet" href="/static/index.css">
 </head>
 
 <body>
 
-<div class="header">🔥 TELEGRAM CONTROL PANEL</div>
+<div class="app">
 
-<div class="container">
+  <!-- SIDEBAR (CHATS) -->
+  <div class="sidebar">
 
-<div class="left">
-<h3>Enviar mensaje</h3>
+    <div class="header glow-text">⚡ CHATS</div>
 
-<input id="admin" placeholder="ADMIN ID">
-<input id="id" placeholder="Chat ID">
-<textarea id="msg" placeholder="Mensaje"></textarea>
+    <!-- CHAT ITEM -->
+    <div class="chat active">
+      <img src="https://i.pravatar.cc/100?img=1">
+      <div class="chat-info">
+        <span class="name">Usuario 1</span>
+        <span class="id">ID: 123456</span>
+      </div>
+      <div class="meta">
+        <span class="count">12</span>
+      </div>
+    </div>
 
-<button onclick="send()">ENVIAR</button>
+    <div class="chat">
+      <img src="https://i.pravatar.cc/100?img=2">
+      <div class="chat-info">
+        <span class="name">Usuario 2</span>
+        <span class="id">ID: 987654</span>
+      </div>
+      <div class="meta">
+        <span class="count">5</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHAT AREA -->
+  <div class="chat-area">
+
+    <div class="top-bar">
+      <span class="chat-title">Usuario 1</span>
+      <span class="status online"></span>
+    </div>
+
+    <!-- MENSAJES -->
+    <div class="messages">
+
+      <div class="msg user">
+        Hola bot
+      </div>
+
+      <div class="msg bot">
+        Hola 👋
+      </div>
+
+      <div class="msg user">
+        ¿Funciona bien?
+      </div>
+
+    </div>
+
+    <!-- INPUT -->
+    <div class="input-area">
+      <input placeholder="Escribe un mensaje...">
+      <button>Enviar</button>
+    </div>
+
+  </div>
+
 </div>
-
-<div class="right">
-<h3>Logs</h3>
-<div class="log" id="log"></div>
-</div>
-
-</div>
-
-<script>
-
-async function send(){
-await fetch("/send",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-admin_id:document.getElementById("admin").value,
-id:document.getElementById("id").value,
-msg:document.getElementById("msg").value
-})
-});
-
-loadLogs();
-}
-
-async function loadLogs(){
-let r=await fetch("/logs");
-let d=await r.json();
-
-document.getElementById("log").innerHTML =
-d.logs.join("<br>");
-}
-
-setInterval(loadLogs,2000);
-
-</script>
 
 </body>
 </html>
