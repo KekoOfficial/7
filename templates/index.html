@@ -2,76 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chat Panel</title>
-<link rel="stylesheet" href="/static/index.css">
+<title>Telegram Console Chat</title>
+<link rel="stylesheet" href="/static/style.css">
+
+<!-- 🔁 AUTO REFRESH (SIN JS) -->
+<meta http-equiv="refresh" content="2">
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-  <!-- SIDEBAR (CHATS) -->
-  <div class="sidebar">
+<div class="header">
+🔥 TELEGRAM LIVE CONSOLE
+</div>
 
-    <div class="header glow-text">⚡ CHATS</div>
+<div class="chat-box">
 
-    <!-- CHAT ITEM -->
-    <div class="chat active">
-      <img src="https://i.pravatar.cc/100?img=1">
-      <div class="chat-info">
-        <span class="name">Usuario 1</span>
-        <span class="id">ID: 123456</span>
-      </div>
-      <div class="meta">
-        <span class="count">12</span>
-      </div>
-    </div>
+{% for log in logs %}
+<div class="msg">{{ log }}</div>
+{% endfor %}
 
-    <div class="chat">
-      <img src="https://i.pravatar.cc/100?img=2">
-      <div class="chat-info">
-        <span class="name">Usuario 2</span>
-        <span class="id">ID: 987654</span>
-      </div>
-      <div class="meta">
-        <span class="count">5</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- CHAT AREA -->
-  <div class="chat-area">
-
-    <div class="top-bar">
-      <span class="chat-title">Usuario 1</span>
-      <span class="status online"></span>
-    </div>
-
-    <!-- MENSAJES -->
-    <div class="messages">
-
-      <div class="msg user">
-        Hola bot
-      </div>
-
-      <div class="msg bot">
-        Hola 👋
-      </div>
-
-      <div class="msg user">
-        ¿Funciona bien?
-      </div>
-
-    </div>
-
-    <!-- INPUT -->
-    <div class="input-area">
-      <input placeholder="Escribe un mensaje...">
-      <button>Enviar</button>
-    </div>
-
-  </div>
+</div>
 
 </div>
 
